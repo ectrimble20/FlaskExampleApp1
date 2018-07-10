@@ -6,7 +6,7 @@ COPY requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt
 
 COPY /www /www
-WORKDIR /src
+WORKDIR /www
 
 EXPOSE 5000
 

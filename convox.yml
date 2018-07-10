@@ -5,7 +5,7 @@ environment:
   - FLASK_SECRET_KEY
   - FLASK_DB_URI
 services:
-  flaskbbdemo:
+  flaskexampleatt1:
     health: /health
     port: 5000
     build: .
