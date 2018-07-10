@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export PYTHONPATH=../
+
 RUN_SCRIPT=/www/example.py
 
 if [ "$FLASK_ENV" == "development" ]; then
