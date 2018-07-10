@@ -1,7 +1,9 @@
 #!/bin/bash
 
+RUN_SCRIPT=/www/example.py
+
 if [ "$FLASK_ENV" == "development" ]; then
-    $(python example.py) "$@"
+    python $RUN_SCRIPT "$@"
 else
-    $(python example.py) "$@"
+    python $RUN_SCRIPT "$@"
 fi

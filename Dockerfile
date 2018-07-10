@@ -1,15 +1,17 @@
 FROM python
 
 # copy files to src
-COPY . /app
+COPY . /
 
-WORKDIR /app
+WORKDIR /
 
 # install python packages
-RUN pip install -r /app/requirements.txt
+RUN pip install -r /requirements.txt
+
+RUN chmod +x /www/bin/run
 
 # start WSGI server
-CMD ["python", "www/example.py"]
+CMD ["www/bin/run"]
 
 # export port
 EXPOSE 5000
