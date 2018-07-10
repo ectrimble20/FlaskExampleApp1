@@ -1,0 +1,60 @@
+{% macro std_form_input(element) -%}
+<div class="form-group">
+    {{ element.label(class="form-control-label") }}
+    {% if element.errors %}
+    {{ element(class="form-control form-control-sm is-invalid") }}
+    <div class="invalid-feedback">
+        {% for error in element.errors %}
+        <span>{{ error }}</span>
+        {% endfor %}
+    </div>
+    {% else %}
+    {{ element(class="form-control form-control-sm") }}
+    {% endif %}
+</div>
+{%- endmacro %}
+
+
+{% macro std_form_check(element) -%}
+<div class="form-check">
+    {{ element(class="form-check-input") }}
+    {{ element.label(class="form-check-label") }}
+</div>
+{%- endmacro %}
+
+
+{% macro std_form_submit(element) -%}
+<div class="form-group">
+    {{ element(class="btn btn-outline-info") }}
+</div>
+{%- endmacro %}
+
+
+{% macro std_have_account() -%}
+<div>
+    <small class="text-muted">
+        Already Have An Account? <a class="ml-2" href="{{ url_for('users.login') }}">Sign In</a>
+    </small>
+</div>
+{%- endmacro %}
+
+
+{% macro std_need_account() -%}
+<div>
+    <small class="text-muted">
+        Need An Account? <a class="ml-2" href="{{ url_for('users.account') }}">Sign Up Now</a>
+    </small>
+</div>
+{%- endmacro %}
+
+
+{% macro std_section_list_group(title, link_list) -%}
+<div class="content-section">
+    <h6 class="mx-auto">{{ title }}</h6>
+    <div class="list-group">
+        {% for label, link in link_list.items %}
+        <a href="{{ url_for(link) }}" class="list-group-item list-group-item-action">{{ label }}</a>
+        {% endfor %}
+    </div>
+</div>
+{%- endmacro %}
