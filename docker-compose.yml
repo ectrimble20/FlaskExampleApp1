@@ -15,4 +15,4 @@ services:
       - FLASK_TESTING=true
       - FLASK_SECRET_KEY
       - FLASK_DB_URI
-    command: ["bin/run"]
+    command: ["python", "run.py"]
