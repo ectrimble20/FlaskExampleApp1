@@ -1,11 +1,5 @@
-environment:
-  - FLASK_ENV="development"
-  - FLASK_DEBUG=true
-  - FLASK_TESTING=true
-  - FLASK_SECRET_KEY
-  - FLASK_DB_URI
 services:
-  flaskexampleapp1:
+  web:
     health: /health
     port: 5000
     build: .
