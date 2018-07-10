@@ -5,7 +5,7 @@ environment:
   - FLASK_SECRET_KEY
   - FLASK_DB_URI
 services:
-  flaskexampleatt1:
+  flaskexampleapp1:
     health: /health
     port: 5000
     build: .
