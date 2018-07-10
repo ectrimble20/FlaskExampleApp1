@@ -1,0 +1,12 @@
+services:
+  web:
+    build: .
+    port: 5000
+    environment:
+      - FLASK_ENV="development"
+      - FLASK_DEBUG=true
+      - FLASK_TESTING=true
+      - FLASK_SECRET_KEY
+      - FLASK_DB_URI
+    command: www/bin/run
+    health: /health
