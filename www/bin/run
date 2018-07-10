@@ -1,3 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 
-$(python run.py) "$@"
+if [ "$FLASK_ENV" == "development" ]; then
+    $(python example.py) "$@"
+else
+    $(python example.py) "$@"
+fi

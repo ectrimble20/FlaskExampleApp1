@@ -1,18 +1,17 @@
-version: "1"
+version: "2"
 services:
-  web:
-    build: .
-    cpu_shares: 10
-    mem_limit: 256MB
-    labels:
-      - convox.port.443.protocol=tls
+  counter:
+    build: www
     ports:
-      - 80:5000
-      - 443:5000
+      - "80:5000"
+      - "443:5000"
+    user: nobody
     environment:
       - FLASK_ENV="development"
       - FLASK_DEBUG=true
       - FLASK_TESTING=true
       - FLASK_SECRET_KEY
       - FLASK_DB_URI
-    command: ["python", "run.py"]
+    command: ["bin/run"]
+    labels:
+      - convox.port.443.protocol=tls

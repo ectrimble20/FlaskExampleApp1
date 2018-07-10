@@ -1,5 +1,0 @@
-services:
-  web:
-    health: /health
-    port: 5000
-    build: .
