@@ -44,8 +44,8 @@ def user_login():
 @runtime.route('/logout', methods=["GET"])
 def user_logout():
     if current_user.is_authenticated:
-        logout_user()
         logger(state="INFO", message="User {} logged out".format(current_user.display_name))
+        logout_user()
         flash("Logged Out Successfully", "success")
     return redirect(url_for('runtime.index'))
 
