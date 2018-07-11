@@ -1,4 +1,4 @@
-import logging
+from datetime import datetime
 from flask import Flask
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
@@ -13,8 +13,6 @@ def create_application(configuration):
     application = Flask(__name__)
     with application.app_context():
         application.config.from_object(configuration)
-        logging.basicConfig(filename=application.config.get("LOGGING_FILE"),
-                            level=application.config.get("LOGGING_LEVEL"))
         database.init_app(application)
         # attempt to create the database, this defaults to checking if exists prior to create so we can
         # safely run this prior to execution.
@@ -29,3 +27,8 @@ def create_application(configuration):
         # register blue prints
         # application.register_blueprint(users)
     return application
+
+
+def logger(state='UNKNOWN', message='No Message'):
+    ts = datetime.strftime(datetime.now(), "%Y-%m-%d %H:%M:%S")
+    print("<{}>{}:{}".format(ts, state.upper(), message))

@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, jsonify, url_for, flash, redirect, request, current_app, Response
 from flask_login import login_required, current_user, login_user, logout_user
-from www import crypt
+from www import crypt, logger
 from www.database import database
 from www.forms.user import UserRegistration, UserLoginForm
 from www.model import User
@@ -28,10 +28,13 @@ def user_login():
         user = User.query.filter_by(email=form.email.data).first()
         if not user or not crypt.check_password_hash(user.password, form.password.data):
             flash("Login Failed", "danger")
+            logger(state="WARNING", message="Failed Login Attempt From {}".format(request.remote_addr))
             return render_template("user_login.html", title="Login")
         else:
             # successful login
             login_user(user, remember=form.remember.data)
+            logger(state="INFO", message="Successful Login by {} From {}"
+                   .format(user.display_name, request.remote_addr))
             flash("Welcome {}".format(user.display_name), "success")
             return redirect(url_for('runtime.index'))
     else:
@@ -42,6 +45,7 @@ def user_login():
 def user_logout():
     if current_user.is_authenticated:
         logout_user()
+        logger(state="INFO", message="User {} logged out".format(current_user.display_name))
         flash("Logged Out Successfully", "success")
     return redirect(url_for('runtime.index'))
 
@@ -59,6 +63,7 @@ def user_register():
         database.session.add(user)
         database.session.commit()
         flash("Registration Successful, please login to continue", "success")
+        logger(state="INFO", message="User account for {} created".format(form.email.data))
         return redirect(url_for('runtime.user_login'))
     else:
         return render_template('user_register.html', title="Register Account", form=form)
