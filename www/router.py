@@ -41,7 +41,7 @@ def user_login():
         return render_template('user_login.html', title="Login", form=form)
 
 
-@runtime.route('/logout', methods=["POST"])
+@runtime.route('/logout', methods=["GET"])
 def user_logout():
     if current_user.is_authenticated:
         logout_user()

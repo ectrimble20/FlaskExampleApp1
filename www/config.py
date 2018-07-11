@@ -3,7 +3,7 @@ import os
 
 class Config(object):
     """
-    Defaults configuration object, adjust these as needed.
+    Defaults configuration object, adjust these using Env vars.
     """
     ENV = os.environ.get('FLASK_ENV', 'production')
     DEBUG = os.environ.get('FLASK_DEBUG', False)
